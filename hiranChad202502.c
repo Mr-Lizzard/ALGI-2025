@@ -13,15 +13,19 @@ int main() {
         printf("Ola, bem vindo ao sistema da CAIFSUL\n Por favor selecione uma opcao:\n 1 - Randomizar os valores\n 2 - Busca por Producao\n 3 - Busca por Acidez\n 4 - Ranking\n 5 - Corrigir dados\n 0 - Sair\n"); 
         scanf("%d", &answer);
         printf("\n");
+        //Menu interativo usando um Switch dentro de um while pra sempre voltar pro menu apos uma interacao do usuario.
         switch(answer) {
             case 1: 
                 for(int i = 0; i < 100; i++) {
-
+                    
+                    //Aleatorizar os elementos entre 1 e 1000.
                     lat[i] = rand() % 1000;
                     longi[i] = rand() % 1000;
                     prod[i] = rand() % 1000;
                     acid[i] = rand() % 1000;
                     printf("Latitude : %d\nLongitude : %d\nProducao : %d\nAcidez : %d\n\n", lat[i], longi[i], prod[i], acid[i]);
+                   
+                    //manter a posicao original dos elementos.
                     prodOriginal[i] = prod[i];
                     latiOriginal[i] = lat[i];
                     longOriginal[i] = longi[i];
@@ -29,6 +33,8 @@ int main() {
                 }
                 break;
             case 2:
+                //analisa todos os valores do array de producao ate encontrar algum igual ao valor informado pelo usuario
+                //caso nao haja valores iguais ao informado pelo usuario, retorna que nao foi possivel encontrar uma coordenada com o valor de producao informado.
                 printf("Digite o valor de producao desejado: \n");
                 int prodBusca;
                 int booleanprod = false;
@@ -48,6 +54,7 @@ int main() {
                 
                 break;
             case 3:
+                //Realiza a mesma busca que o Case 2, porem nos valores do array de acidez.
                 printf("Digite o valor de acidez desejado: \n");
                 int acidBusca;
                 int booleanAcid = false;
@@ -66,6 +73,7 @@ int main() {
                 booleanAcid = false;
                 break;
             case 4:
+                //O sistema guarda os valores do indice atual (i) e compara com o valor do indice(j), caso o valor de j seja maior que o de i, realiza a troca de posicoes entre ambos.
                 printf("Ranking por produção: \n");
                 for(int i = 0; i < 100; i++) {
                     for(int j = i + 1; j < 100; j++) {
@@ -86,6 +94,7 @@ int main() {
                             }    
                     }
                 }
+                //imprime o Ranking
                 for(int k = 0; k < 100; k++) {
                     printf("Latitude : %d\nLongitude : %d\nProducao : %d\nAcidez : %d\n\n\n", lat[k], longi[k], prod[k], acid[k]);
                 }
@@ -114,6 +123,7 @@ int main() {
                     }
                     break;
             case 5:
+                //permite a edicao dos valores de um indice especifico dos arrays.
                 int answer2, confirmation;
                 for(int i = 0; i < 100; i++) {
                     printf("%d - Latitude : %d\n Longitude : %d\n Producao : %d\n Acidez : %d\n\n\n", i + 1, latiOriginal[i],longOriginal[i], prodOriginal[i], acidOriginal[i]);
