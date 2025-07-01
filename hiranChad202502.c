@@ -201,7 +201,10 @@ int main() {
                 break;
 
             default:
-                printf("Digite uma opcao valida!!!\n\n\n");
+                if(answer != 0) {
+                    printf("Opcao invalida! Tente novamente.\n");
+                }
+                break;
         }
 
     } while (answer != 0);
