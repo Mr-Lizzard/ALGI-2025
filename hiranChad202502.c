@@ -3,157 +3,205 @@
 #include <time.h>
 #include <stdbool.h>
 
-
 int main() {
-    int lat[100], longi[100],prod[100], acid[100], answer;
+    int lat[100], longi[100], prod[100], acid[100], answer;
     int prodOriginal[100], latiOriginal[100], longOriginal[100], acidOriginal[100];
+    int answer2, confirmation;
     srand(time(NULL));
-    
+
     do {
-        printf("Ola, bem vindo ao sistema da CAIFSUL\n Por favor selecione uma opcao:\n 1 - Randomizar os valores\n 2 - Busca por Producao\n 3 - Busca por Acidez\n 4 - Ranking\n 5 - Corrigir dados\n 0 - Sair\n"); 
+        printf("Ola, bem vindo ao sistema da CAIFSUL\n Por favor selecione uma opcao:\n"
+               " 1 - Randomizar os valores\n"
+               " 2 - Busca por Producao\n"
+               " 3 - Busca por Acidez\n"
+               " 4 - Ranking\n"
+               " 5 - Corrigir dados\n"
+               " 0 - Sair\n"
+               "\n");
         scanf("%d", &answer);
+        #ifdef _WIN32
+            system("cls");
+        #else
+            system("clear");
+        #endif
+
         printf("\n");
-        //Menu interativo usando um Switch dentro de um while pra sempre voltar pro menu apos uma interacao do usuario.
-        switch(answer) {
-            case 1: 
-                for(int i = 0; i < 100; i++) {
-                    
-                    //Aleatorizar os elementos entre 1 e 1000.
+
+        // Menu interativo usando um Switch dentro de um while pra sempre voltar pro menu apos uma interacao do usuario.
+        switch (answer) {
+            case 1:
+                for (int i = 0; i < 100; i++) {
+                    // Aleatorizar os elementos entre 1 e 1000.
                     lat[i] = rand() % 1000;
                     longi[i] = rand() % 1000;
                     prod[i] = rand() % 1000;
                     acid[i] = rand() % 1000;
-                    printf("Latitude : %d\nLongitude : %d\nProducao : %d\nAcidez : %d\n\n", lat[i], longi[i], prod[i], acid[i]);
-                   
-                    //manter a posicao original dos elementos.
+
+                    // Manter a posicao original dos elementos.
                     prodOriginal[i] = prod[i];
                     latiOriginal[i] = lat[i];
                     longOriginal[i] = longi[i];
                     acidOriginal[i] = acid[i];
                 }
+                printf("Valores aleatorios gerados!\n");
+                printf("\n\n");
                 break;
-            case 2:
-                //analisa todos os valores do array de producao ate encontrar algum igual ao valor informado pelo usuario
-                //caso nao haja valores iguais ao informado pelo usuario, retorna que nao foi possivel encontrar uma coordenada com o valor de producao informado.
-                printf("Digite o valor de producao desejado: \n");
-                int prodBusca;
-                int booleanprod = false;
-                scanf("%d", &prodBusca);
-                for(int i = 0; i < 100; i++) {
-                    if(prodBusca == prod[i]) {
-                        printf("Encontrado: Latitude: %d, Longitude: %d, Producao: %d, Acidez: %d\n", lat[i], longi[i], prod[i], acid[i]);
-                        printf("\n\n\n");
-                        booleanprod = true;
-                    }
-                }
-                if(booleanprod == false) {
-                    printf("Nao encontrado: Producao %d\n", prodBusca);
-                    printf("\n\n\n");
-                }
-                booleanprod = false;
-                
-                break;
-            case 3:
-                //Realiza a mesma busca que o Case 2, porem nos valores do array de acidez.
-                printf("Digite o valor de acidez desejado: \n");
-                int acidBusca;
-                int booleanAcid = false;
-                scanf("%d", &acidBusca);
-                for(int i = 0; i < 100; i++) {
-                    if(acidBusca == acid[i]) {
-                        printf("Encontrado: Latitude: %d, Longitude: %d, Producao: %d, Acidez: %d\n", lat[i], longi[i], prod[i], acid[i]);
-                        printf("\n\n\n");
-                        booleanAcid = true;
-                    }
-                }
-                if(booleanAcid == false){
-                    printf("Não foi encontrado: Acidez %d\n", acidBusca);
-                    printf("\n\n\n");
-                }
-                booleanAcid = false;
-                break;
-            case 4:
-                //O sistema guarda os valores do indice atual (i) e compara com o valor do indice(j), caso o valor de j seja maior que o de i, realiza a troca de posicoes entre ambos.
-                printf("Ranking por produção: \n");
-                for(int i = 0; i < 100; i++) {
-                    for(int j = i + 1; j < 100; j++) {
-                        int tempProd, tempLat, tempLong, tempAcid;
-                        if(prod[j] > prod[i]) {
-                            tempProd = prod[i];
-                            prod[i] = prod[j];
-                            prod[j] = tempProd;
-                            tempLat = lat[i];
-                            lat[i] = lat[j];
-                            lat[j] = tempLat;
-                            tempLong = longi[i];
-                            longi[i] = longi[j];
-                            longi[j] = tempLong;
-                            tempAcid = acid[i];
-                            acid[i] = acid[j];
-                            acid[j] = tempAcid;
-                            }    
-                    }
-                }
-                //imprime o Ranking
-                for(int k = 0; k < 100; k++) {
-                    printf("Latitude : %d\nLongitude : %d\nProducao : %d\nAcidez : %d\n\n\n", lat[k], longi[k], prod[k], acid[k]);
-                }
-                printf("Ranking por Acidez: \n");
-                for(int i = 0; i < 100; i++) {
-                    for(int j = i + 1; j < 100; j++) {
-                        int tempProd, tempLat, tempLong, tempAcid;
-                        if(acid[j] > acid[i]) {
-                            tempProd = prod[i];
-                            prod[i] = prod[j];
-                            prod[j] = tempProd;
-                            tempLat = lat[i];
-                            lat[i] = lat[j];
-                            lat[j] = tempLat;
-                            tempLong = longi[i];
-                            longi[i] = longi[j];
-                            longi[j] = tempLong;
-                            tempAcid = acid[i];
-                            acid[i] = acid[j];
-                            acid[j] = tempAcid;
-                            }    
-                        }
-                        }
-                        for(int k = 0; k < 100; k++) {
-                            printf("Latitude : %d\nLongitude : %d\nProducao : %d\nAcidez : %d\n\n\n", lat[k], longi[k], prod[k], acid[k]);
-                    }
-                    break;
-            case 5:
-                //permite a edicao dos valores de um indice especifico dos arrays.
-                int answer2, confirmation;
-                for(int i = 0; i < 100; i++) {
-                    printf("%d - Latitude : %d\n Longitude : %d\n Producao : %d\n Acidez : %d\n\n\n", i + 1, latiOriginal[i],longOriginal[i], prodOriginal[i], acidOriginal[i]);
-                }
-                printf("Por Favor, digite a posicao em que deseja realizar a alteracao dos valores : \n");
-                scanf("%d",&answer2);
-                printf("Latitude : %d\n Longitude : %d\n Producao : %d\n Acidez : %d\n\n\n", latiOriginal[answer2 -1], longOriginal[answer2-1], prodOriginal[answer2-1], acidOriginal[answer2-1]);
-                printf("Você deseja alterar esses valores ?\n 1 - Sim\n 2-Nao\n");
-                scanf("%d", &confirmation);
-                if(confirmation == 1) {
-                    printf("Digite a nova latitude :\n");
-                    scanf("%d",&latiOriginal[answer2-1]);
-                    printf("Digite a nova longitude :\n");
-                    scanf("%d",&longOriginal[answer2-1]);
-                    printf("Digite o novo valor de producao :\n");
-                    scanf("%d",&prodOriginal[answer2-1]);
-                    printf("Digite o novo valor de Acidez :\n");
-                    scanf("%d",&acidOriginal[answer2-1]);
-                } else {
-                    printf("Operacao cancelada com sucesso!");
-                }
-                for(int i = 0; i < 100; i++) {
-                    printf("%d - Latitude : %d\n Longitude : %d\n Producao : %d\n Acidez : %d\n\n\n", i + 1, latiOriginal[i],longOriginal[i], prodOriginal[i], acidOriginal[i]);
-                }
-                break;
-            default: 
-                printf("Digite uma opcao valida!!!\n\n\n");
-                }
-            
-        }while(answer != 0); 
 
-        return 0;
-    }
+            case 2:
+                // Ordena os valores do array de producao em ordem decrescente.
+                for (int i = 0; i < 100; i++) {
+                    for (int j = i + 1; j < 100; j++) {
+                        int tempProd, tempLat, tempLong, tempAcid;
+                        if (prod[j] > prod[i]) {
+                            tempProd = prod[i];
+                            prod[i] = prod[j];
+                            prod[j] = tempProd;
+
+                            tempLat = lat[i];
+                            lat[i] = lat[j];
+                            lat[j] = tempLat;
+
+                            tempLong = longi[i];
+                            longi[i] = longi[j];
+                            longi[j] = tempLong;
+
+                            tempAcid = acid[i];
+                            acid[i] = acid[j];
+                            acid[j] = tempAcid;
+                        }
+                    }
+                }
+
+                printf("Digite a posição no ranking de produção desejado: \n");
+                int prodBusca;
+                scanf("%d", &prodBusca);
+                printf("Posição no ranking : %d\n Latitude : %d\n Longitude : %d\n Producao : %d\n Acidez : %d\n\n",
+                       prodBusca, lat[prodBusca - 1], longi[prodBusca - 1], prod[prodBusca - 1], acid[prodBusca - 1]);
+                break;
+
+            case 3:
+                // Ordena os valores do array de acidez em ordem decrescente.
+                for (int i = 0; i < 100; i++) {
+                    for (int j = i + 1; j < 100; j++) {
+                        int tempProd, tempLat, tempLong, tempAcid;
+                        if (acid[j] > acid[i]) {
+                            tempProd = prod[i];
+                            prod[i] = prod[j];
+                            prod[j] = tempProd;
+
+                            tempLat = lat[i];
+                            lat[i] = lat[j];
+                            lat[j] = tempLat;
+
+                            tempLong = longi[i];
+                            longi[i] = longi[j];
+                            longi[j] = tempLong;
+
+                            tempAcid = acid[i];
+                            acid[i] = acid[j];
+                            acid[j] = tempAcid;
+                        }
+                    }
+                }
+
+                printf("Digite a posição no ranking de acidez desejado: \n");
+                int acidBusca;
+                scanf("%d", &acidBusca);
+                printf("Posição no ranking : %d\n Latitude : %d\n Longitude : %d\n Producao : %d\n Acidez : %d\n\n",
+                       acidBusca, lat[acidBusca - 1], longi[acidBusca - 1], prod[acidBusca - 1], acid[acidBusca - 1]);
+                break;
+
+            case 4:
+                // Ranking por produção.
+                printf("\t\t\t\tRanking por produção: \n");
+                for (int i = 0; i < 100; i++) {
+                    for (int j = i + 1; j < 100; j++) {
+                        int tempProd, tempLat, tempLong, tempAcid;
+                        if (prod[j] > prod[i]) {
+                            tempProd = prod[i];
+                            prod[i] = prod[j];
+                            prod[j] = tempProd;
+
+                            tempLat = lat[i];
+                            lat[i] = lat[j];
+                            lat[j] = tempLat;
+
+                            tempLong = longi[i];
+                            longi[i] = longi[j];
+                            longi[j] = tempLong;
+
+                            tempAcid = acid[i];
+                            acid[i] = acid[j];
+                            acid[j] = tempAcid;
+                        }
+                    }
+                }
+
+                for (int k = 0; k < 100; k++) {
+                    printf("Latitude : %d\nLongitude : %d\nProducao : %d\nAcidez : %d\n\n\n",
+                           lat[k], longi[k], prod[k], acid[k]);
+                }
+
+                // Ranking por acidez.
+                printf("\t\t\t\tRanking por Acidez: \n");
+                for (int i = 0; i < 100; i++) {
+                    for (int j = i + 1; j < 100; j++) {
+                        int tempProd, tempLat, tempLong, tempAcid;
+                        if (acid[j] > acid[i]) {
+                            tempProd = prod[i];
+                            prod[i] = prod[j];
+                            prod[j] = tempProd;
+
+                            tempLat = lat[i];
+                            lat[i] = lat[j];
+                            lat[j] = tempLat;
+
+                            tempLong = longi[i];
+                            longi[i] = longi[j];
+                            longi[j] = tempLong;
+
+                            tempAcid = acid[i];
+                            acid[i] = acid[j];
+                            acid[j] = tempAcid;
+                        }
+                    }
+                }
+
+                for (int k = 0; k < 100; k++) {
+                    printf("Latitude : %d\nLongitude : %d\nProducao : %d\nAcidez : %d\n\n\n",
+                           lat[k], longi[k], prod[k], acid[k]);
+                }
+                break;
+
+            case 5:
+                // Menu de correção de dados.
+                printf("Digite o valor da latitude em que deseja corrigir: \n");
+                int latBusca;
+                scanf("%d", &latBusca);
+                printf("Digite o valor da longitude em que deseja corrigir: \n");
+                int longBusca;
+                scanf("%d", &longBusca);
+
+                for (int i = 0; i < 100; i++) {
+                    if (lat[i] == latBusca && longi[i] == longBusca) {
+                        printf("Coordenada encontrada!\n");
+                        printf("Latitude : %d\nLongitude : %d\nProducao : %d\nAcidez : %d\n",
+                               lat[i], longi[i], prod[i], acid[i]);
+                        printf("Digite o novo valor de producao: \n");
+                        scanf("%d", &prod[i]);
+                        printf("Digite o novo valor de acidez: \n");
+                        scanf("%d", &acid[i]);
+                        printf("Dados corrigidos com sucesso!\n");
+                        break;
+                    }
+                }
+                break;
+
+            default:
+                printf("Digite uma opcao valida!!!\n\n\n");
+        }
+
+    } while (answer != 0);
+
+    return 0;
+}
