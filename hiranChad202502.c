@@ -139,8 +139,8 @@ int main() {
                 }
 
                 for (int k = 0; k < 100; k++) {
-                    printf("Latitude : %d\nLongitude : %d\nProducao : %d\nAcidez : %d\n\n\n",
-                           lat[k], longi[k], prod[k], acid[k]);
+                    printf("Posicao no Ranking : %d\nLatitude : %d\nLongitude : %d\nProducao : %d\nAcidez : %d\n\n\n",
+                           k+1, lat[k], longi[k], prod[k], acid[k]);
                 }
 
                 break;
@@ -171,8 +171,8 @@ int main() {
                 }
 
                 for (int k = 0; k < 100; k++) {
-                    printf("Latitude : %d\nLongitude : %d\nProducao : %d\nAcidez : %d\n\n\n",
-                           lat[k], longi[k], prod[k], acid[k]);
+                    printf("Posicao no Ranking : %d\nLatitude : %d\nLongitude : %d\nProducao : %d\nAcidez : %d\n\n\n",
+                           k+1, lat[k], longi[k], prod[k], acid[k]);
                 }
                 break;
 
