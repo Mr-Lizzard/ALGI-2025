@@ -14,8 +14,9 @@ int main() {
                " 1 - Randomizar os valores\n"
                " 2 - Busca por Producao\n"
                " 3 - Busca por Acidez\n"
-               " 4 - Ranking\n"
-               " 5 - Corrigir dados\n"
+               " 4 - Ranking por Produção\n"
+               " 5 - Ranking por Acidez\n"
+               " 6 - Correção de dados\n"
                " 0 - Sair\n"
                "\n");
         scanf("%d", &answer);
@@ -142,6 +143,8 @@ int main() {
                            lat[k], longi[k], prod[k], acid[k]);
                 }
 
+                break;
+            case 5:
                 // Ranking por acidez.
                 printf("\t\t\t\tRanking por Acidez: \n");
                 for (int i = 0; i < 100; i++) {
@@ -173,7 +176,7 @@ int main() {
                 }
                 break;
 
-            case 5:
+            case 6:
                 // Menu de correção de dados.
                 printf("Digite o valor da latitude em que deseja corrigir: \n");
                 int latBusca;
